@@ -9,9 +9,9 @@ let isWinner
 
 /*-------------------------------- Constants --------------------------------*/
 
-const winningMessage = `Player ${turn}`
-const drawMessage = `Game is a DRAW!`
-const currentPlayerTurn = `It is currently Player ${turn} turn.`
+const winningMessage = () => `Player ${turn} is the winner`
+const drawMessage = () => `Game is a DRAW!`
+const currentPlayerTurn = () => `It is currently Player ${turn} turn.`
 
 
 
@@ -34,8 +34,8 @@ const gameStatus = document.getElementById('message')
 init()
 function init(){
   board = [
-    null, null, null,
-    null, null, null,
+    1, null, null,
+    null, -1, null,
     null, null, null,
   ]
   isWinner = null;
@@ -47,14 +47,28 @@ function init(){
 
 function render(){
   squares.forEach(function(square, idx){
-    board[idx]= square
-    if (turn === 1 ){ //& element is clicked
+  
+    if (board[idx] === 1 ){
       square.style.backgroundColor = 'green'
+      square.innerText= 'X'
     }
-    else if (turn === -1 ){ //& element is clicked
+    else if (board[idx] === -1 ){ 
       square.style.backgroundColor = 'yellow'
+      square.innerText= 'O'
     }
   })
+  
+  
+  
+  if (isWinner===-1 || isWinner===1){
+    winningMessage()
+  }
+  else if (isWinner==='T'){
+    drawMessage()
+  }
+  else{
+    currentPlayerTurn()
+  }
 
 
 
