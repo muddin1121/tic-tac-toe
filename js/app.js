@@ -20,22 +20,23 @@ const currentPlayerTurn = () => `It is currently Player ${turn} turn.`
 
 /*------------------------ Cached Element References ------------------------*/
 
-let squares = document.querySelectorAll('#sq')
+let squares = document.querySelectorAll('.gameBoard')
 
 const gameStatus = document.getElementById('message')
+let boardElement = document.querySelector('.board')
 
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-
+boardElement.addEventListener('click',handleClick)
 
 /*-------------------------------- Functions --------------------------------*/
 init()
 function init(){
   board = [
-    1, null, null,
-    null, -1, null,
+    null, null, null,
+    null, null, null,
     null, null, null,
   ]
   isWinner = null;
@@ -44,6 +45,7 @@ function init(){
 
   
 }
+
 
 function render(){
   squares.forEach(function(square, idx){
@@ -58,8 +60,6 @@ function render(){
     }
   })
   
-  
-  
   if (isWinner===-1 || isWinner===1){
     winningMessage()
   }
@@ -69,9 +69,30 @@ function render(){
   else{
     currentPlayerTurn()
   }
-
-
-
   }
+
   
+const winningArray = [  [0,1,2],
+                        [3,4,5],
+                        [6,7,8],
+                        [0,3,6],
+                        [1,4,7],
+                        [2,5,8],
+                        [6,4,2],
+                        [0,4,8]   ]
+
+function handleClick(evt){
+  if(board[parseInt(evt.target.id.replace('sq',''))]!==null){
+    return
+  }
+board[(evt.target.id.replace("sq",""))]=turn
+turn = turn * -1
+
+
+render()
+
+
+
+}
+
 
