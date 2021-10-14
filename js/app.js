@@ -55,6 +55,7 @@ function init(){
 
 
 function render(){
+  
   squares.forEach(function(square, idx){
   
     if (board[idx] === 1 ){
@@ -72,7 +73,7 @@ function render(){
   })
   
   if (isWinner===-1){
-    gameStatus.innerText = `WHOOP! O Wins!`
+    gameStatus.innerText = `AYO! O Wins!`
     gameStatus.style.color = "pink"
   }
   else if(turn===1 && !isWinner){
@@ -82,9 +83,10 @@ function render(){
   else if(turn===-1 && !isWinner){
     gameStatus.innerText = "Player - O Turn"
     gameStatus.style.color = "pink"
+    
   }
   else if(isWinner===1){
-    gameStatus.innerText = `WHOOP! X Wins!`
+    gameStatus.innerText = `AYO! X Wins!`
     gameStatus.style.color = "paleturquoise"
   }
   else if (isWinner==='T'){
