@@ -1,7 +1,7 @@
 
 /*---------------------------- Variables (state) ----------------------------*/
 let turn
-let board = []
+let board = [null, null, null, null, null, null, null, null, null]
 let isWinner
 let bob 
 
@@ -32,12 +32,15 @@ let squares = document.querySelectorAll('.gameBoard')
 
 const gameStatus = document.getElementById('message')
 let boardElement = document.querySelector('.board')
+const resetBtn = document.getElementById('reset')
 
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 boardElement.addEventListener('click',handleClick)
+
+resetBtn.addEventListener('click', init)
 
 /*-------------------------------- Functions --------------------------------*/
 init()
@@ -50,7 +53,6 @@ function init(){
   isWinner = null;
   turn = 1
   render ()
-
   
 }
 
@@ -59,25 +61,38 @@ function render(){
   squares.forEach(function(square, idx){
   
     if (board[idx] === 1 ){
-      square.style.backgroundColor = 'green'
+      square.style.backgroundColor = 'paleturquoise'
       square.innerText= 'X'
     }
     else if (board[idx] === -1 ){ 
-      square.style.backgroundColor = 'yellow'
+      square.style.backgroundColor = 'lightpink'
       square.innerText= 'O'
+    }
+    else if (board[idx] === null) {
+      square.style.backgroundColor = "tan"
+      square.innerText= ''
     }
   })
   
-  if (isWinner===-1 || isWinner===1){
-    winningMessage()
+  if (isWinner===-1){
+    gameStatus.innerText = `Congratulations! O Wins!`
+  }
+  else if(turn===1 && !isWinner){
+    gameStatus.innerText = "It's currently player X's turn"
+  }
+  else if(turn===-1 && !isWinner){
+    gameStatus.innerText = "It's currently player O's turn"
+  }
+  else if(isWinner===1){
+    gameStatus.innerText = `Congratulations! X Wins!`
   }
   else if (isWinner==='T'){
-    drawMessage()
+    gameStatus.innerText =  `IT IS A TIE: PLAY AGAIN`
   }
-  else{
-    currentPlayerTurn()
+
+    
   }
-  }
+  
 
   
 
@@ -108,7 +123,7 @@ function handleClick(evt){
 
       }
       else if(board.includes(null)){
-        return null
+        return 
       }
       else{
         isWinner = "T"
@@ -117,9 +132,9 @@ function handleClick(evt){
       
     })
 
-
-  
   }
+
+
 
 
 
