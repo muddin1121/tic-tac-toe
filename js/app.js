@@ -10,9 +10,6 @@ let bob
 
 /*-------------------------------- Constants --------------------------------*/
 
-const winningMessage = () => `Player ${turn} is the winner`
-const drawMessage = () => `Game is a DRAW!`
-const currentPlayerTurn = () => `It is currently Player ${turn} turn.`
 
 let winningArray =   [  [0,1,2],
                         [3,4,5],
@@ -69,25 +66,30 @@ function render(){
       square.innerText= 'O'
     }
     else if (board[idx] === null) {
-      square.style.backgroundColor = "tan"
+      square.style.backgroundColor = "#E9DEFF"
       square.innerText= ''
     }
   })
   
   if (isWinner===-1){
-    gameStatus.innerText = `Congratulations! O Wins!`
+    gameStatus.innerText = `WHOOP! O Wins!`
+    gameStatus.style.color = "pink"
   }
   else if(turn===1 && !isWinner){
-    gameStatus.innerText = "It's currently player X's turn"
+    gameStatus.innerText = "Player - X Turn"
+    gameStatus.style.color = "paleturquoise"
   }
   else if(turn===-1 && !isWinner){
-    gameStatus.innerText = "It's currently player O's turn"
+    gameStatus.innerText = "Player - O Turn"
+    gameStatus.style.color = "pink"
   }
   else if(isWinner===1){
-    gameStatus.innerText = `Congratulations! X Wins!`
+    gameStatus.innerText = `WHOOP! X Wins!`
+    gameStatus.style.color = "paleturquoise"
   }
   else if (isWinner==='T'){
-    gameStatus.innerText =  `IT IS A TIE: PLAY AGAIN`
+    gameStatus.innerText =  `IT IS A TIE!!!`
+    gameStatus.style.color = "tan"
   }
 
     
